@@ -1,5 +1,8 @@
 #include<windows.h>
 #include<stdio.h>
+#include<stdlib.h>
+#include "E:\Projects\C Language\Bank-Management-System\File Containing Functions.c"
+int menu(void);
 int gotoxy(int x, int y)
 {
     COORD c;
@@ -8,7 +11,7 @@ int gotoxy(int x, int y)
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
 
-void menu()
+int menu()
 {
     int i, a;
     gotoxy(40,0);
@@ -37,11 +40,29 @@ void menu()
     gotoxy(40, 15);
     printf("Enter your choice : ");
     scanf("%d", &a);
+    return a;
 }
 
 int main()
 {
-    menu();
+    int choice;
+    choice=menu();
+    switch(choice)
+    {
+    case 1:
+        {
+            system("cls");
+            new_customer();
+            break;
+        }
+    case 8 :
+        {
+            system("cls");
+            printf("Thank You for using our services!!");
+            exit(0);
+        }
+
+    }
     getch();
     return 0;
 }
