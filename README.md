@@ -7,3 +7,5 @@ Also, this file contains and executable file, object file & a C Source File.
 Update 1.1: Pushed the 'File Containing Fucntions' to add functionality to the previously added menu. 
 Created the new_customer() function and used it for adding fetching details from the user. Created many types of data types using structure method.
 Added the stdlib.h header file and used system("cls") to clear the screen after entering into the menu.
+Update 1.2 : Added a 'Transaction Function' to the 'File Containing Functions' to add more functionality to the main menu. 
+'Transaction Function' lets user add money and withdraw money from the database.
