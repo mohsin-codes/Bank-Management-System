@@ -33,9 +33,7 @@ int menu()
     gotoxy(40, 10);
     printf("[6] View Customer List");
     gotoxy(40, 11);
-    printf("[7] ATM feature");
-    gotoxy(40, 12);
-    printf("[8] Exit\n");
+    printf("[7] Exit\n");
 
     gotoxy(40, 15);
     printf("Enter your choice : ");
@@ -55,7 +53,14 @@ int main()
             new_customer();
             break;
         }
-    case 8 :
+    case 3:
+        {
+            system("cls");
+            transaction();
+            break;
+        }
+
+    case 7 :
         {
             system("cls");
             printf("Thank You for using our services!!");
