@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "E:\Projects\C Language\Bank-Management-System\File Containing Functions.c"
+
 int menu(void);
 int gotoxy(int x, int y)
 {
@@ -47,26 +48,31 @@ int main()
     choice=menu();
     switch(choice)
     {
-    case 1:
-        {
-            system("cls");
-            new_customer();
-            break;
-        }
-    case 3:
-        {
-            system("cls");
-            transaction();
-            break;
-        }
+        case 1:
+            {
+                system("cls");
+                new_customer();
+                break;
+            }
+        case 3:
+            {
+                system("cls");
+                transaction();
+                break;
+            }
 
-    case 7 :
-        {
-            system("cls");
-            printf("Thank You for using our services!!");
-            exit(0);
-        }
-
+        case 7 :
+            {
+                system("cls");
+                printf("Thank You for using our services!!");
+                exit(0);
+            }
+        default:
+            {
+                printf("Wrong Input!!\n");
+                system("cls");
+                menu();
+            }
     }
     getch();
     return 0;

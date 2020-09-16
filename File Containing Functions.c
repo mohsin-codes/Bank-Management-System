@@ -31,7 +31,7 @@ void new_customer()
     scanf("%c",&c1.account_type);
     while(flag!=1)
     {
-        if (c1.account_type=='S' ||c1.account_type=='C' ||c1.account_type=='F')
+        if (c1.account_type=='S'|| c1.account_type=='s'||c1.account_type=='C'||c1.account_type=='c'||c1.account_type=='F'||c1.account_type=='f')
         {
             printf("Account Created Successfully!!\n");
             flag=1;
@@ -47,16 +47,17 @@ void new_customer()
     {
         printf("Return to Main Menu? Y/N : ");
         scanf("%c", &ch);
-        if(ch=='Y')
+        if(ch=='Y' || ch=='y')
         {
             system("cls");
             main();
         }
-        else if(ch=='N')
+        else if(ch=='N' || ch=='n')
         {
             exit(0);
         }
         else
+
         {
         printf("\nWrong input. Try Again!\n");
         }
@@ -93,12 +94,14 @@ void transaction()
                 printf("\nEnter the amount to withdraw : ");
                 scanf("%f", &withdraw);
                 Sleep(5000);
-                if(balance==0)
+                if(balance<=0)
                     printf("\nError: Amount cannot be withdrawn.\nAvailable Balance : %.2f\n", balance);
                 else
+                {
                     balance=balance-withdraw;
-                printf("\nAmount Withdrawn Successfully!!");
-                printf("\nAvailable Balance : %.2f\n", balance);
+                    printf("\nAmount Withdrawn Successfully!!");
+                    printf("\nAvailable Balance : %.2f\n", balance);
+                }
                 break;
             }
             case 3:{
