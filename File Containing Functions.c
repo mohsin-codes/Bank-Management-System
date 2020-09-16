@@ -4,12 +4,15 @@
 
 void new_customer(void);
 void transaction(void);
+typedef struct date{
+    int month, date, year;
+}date;
 
 typedef struct customer
 {
     char customer_name[100];
     char father_name[100];
-    char Birth_Date[100];
+    struct date dob;
     char account_type;
 }CUSTOMER;
 
@@ -24,10 +27,10 @@ void new_customer()
     printf("Enter Father's name : ");
     fflush(stdin);
     gets(c1.father_name);
-    printf("Enter Date of birth in numbers : ");
-    fflush(stdin);
-    gets(c1.Birth_Date);
+    printf("Enter Date of birth (dd/mm/yyyy) : ");
+    scanf("%d/%d/%d", &c1.dob.date, &c1.dob.month, &c1.dob.year);
     printf("Enter Account Type:\nPress S for Savings, \nPress C for Current, \nF for Fixed : ");
+    fflush(stdin);
     scanf("%c",&c1.account_type);
     while(flag!=1)
     {
@@ -46,6 +49,7 @@ void new_customer()
     while(1)
     {
         printf("Return to Main Menu? Y/N : ");
+        fflush(stdin);
         scanf("%c", &ch);
         if(ch=='Y' || ch=='y')
         {
