@@ -3,7 +3,7 @@
 #include<windows.h>
 
 int menu(void);
-float interest(int,int,int);
+float interest(float,int,int);
 void new_customer(void);
 void transaction(void);
 void customer_list(void);
@@ -17,7 +17,7 @@ void callback()
     char ch;
     while(1)
     {
-        printf("Return to Main Menu? Y/N : ");
+        printf("\nReturn to Main Menu? Y/N : ");
         fflush(stdin);
         scanf("%c", &ch);
         if(ch=='Y' || ch=='y')
@@ -203,7 +203,6 @@ void update_info()
     printf("\t\t\t\tUPDATE RECORD\n");
     printf("========================================================================================\n\n\n");
     int choice, check=0;
-    int x,y;
     FILE *old, *upd;
     old=fopen("DataFile.txt", "r");
     upd=fopen("new.txt", "w");
@@ -280,8 +279,8 @@ void update_info()
     }
     fclose(old);
     fclose(upd);
-    x=remove("DataFile.txt");
-    y=rename("New.txt", "DataFile.txt");
+    remove("DataFile.txt");
+    rename("New.txt", "DataFile.txt");
 
     if(check==0)
         printf("\nRecord not found!!!\n");
@@ -316,14 +315,14 @@ void transaction()
     FILE *old, *tr;
     int choice, check=0;
     old=fopen("DataFile.txt", "r");
-    tr=fopen("new.txt", "w+");
+    tr=fopen("new.txt", "w");
     printf("Enter Account Number : ");
     scanf("%ld", &transact.account_number);
     while(fscanf(old, "%ld %s %s %s %s %s %s %s %s %s %s %d %d/%d/%d %d %d/%d/%d %c", &add.account_number, add.customer_first_name, add.customer_last_name, add.father_first_name, add.father_last_name, add.h_no, add.st_name, add.area, add.city, add.Nationality, &add.p_number, &add.age, &add.dob.day, &add.dob.month, &add.dob.year, &add.amount, &add.deposit.day, &add.deposit.month, &add.deposit.year, &add.account_type)!=EOF)
     {
         if(add.account_number==transact.account_number)
         {
-            check=1;
+            check++;
                 if(add.account_type=='f'||add.account_type=='F')
                 {
                     printf("Error!! Deposit or Withdraw in fixed accounts is not allowed!");
@@ -349,7 +348,8 @@ void transaction()
                         scanf("%d", &choice);
                         switch(choice)
                         {
-                            case 1: {
+                            case 1:
+                            {
                                 system("cls");
                                 printf("========================================================================================\n");
                                 printf("\t\t\t\tDEPOSIT\n");
@@ -358,14 +358,15 @@ void transaction()
                                 scanf("%d", &transact.amount);
                                 Sleep(5000);
                                 add.amount=add.amount+transact.amount;
-                                fprintf(tr, "%ld %s %s %s %s %s %s %s %s %s %s %d %d/%d/%d %d %d/%d/%d %c \n", add.account_number, add.customer_first_name, add.customer_last_name, add.father_first_name, add.father_last_name, add.h_no, add.st_name, add.area, add.city, add.Nationality, add.p_number, add.age, add.dob.day, add.dob.month, add.dob.year, add.amount, add.deposit.day, add.deposit.month, add.deposit.year, add.account_type);
+                                fprintf(tr,"%ld %s %s %s %s %s %s %s %s %s %s %d %d/%d/%d %d %d/%d/%d %c\n", add.account_number, add.customer_first_name, add.customer_last_name, add.father_first_name, add.father_last_name, add.h_no, add.st_name, add.area, add.city, add.Nationality, add.p_number, add.age, add.dob.day, add.dob.month, add.dob.year, add.amount, add.deposit.day, add.deposit.month, add.deposit.year, add.account_type);
                                 printf("\nAmount Deposit Successfully!!");
                                 printf("\nAvailable Balance : %d\n", add.amount);
                                 Sleep(3000);
                                 break;
                             }
 
-                            case 2: {
+                            case 2:
+                            {
                                 system("cls");
                                 printf("========================================================================================\n");
                                 printf("\t\t\t\tWITHDRAW\n");
@@ -378,7 +379,7 @@ void transaction()
                                 else
                                 {
                                     add.amount=add.amount-transact.amount;
-                                    fprintf(tr, "%ld %s %s %s %s %s %s %s %s %s %s %d %d/%d/%d %d %d/%d/%d %c \n", add.account_number, add.customer_first_name, add.customer_last_name, add.father_first_name, add.father_last_name, add.h_no, add.st_name, add.area, add.city, add.Nationality, add.p_number, add.age, add.dob.day, add.dob.month, add.dob.year, add.amount, add.deposit.day, add.deposit.month, add.deposit.year, add.account_type);
+                                    fprintf(tr,"%ld %s %s %s %s %s %s %s %s %s %s %d %d/%d/%d %d %d/%d/%d %c\n", add.account_number, add.customer_first_name, add.customer_last_name, add.father_first_name, add.father_last_name, add.h_no, add.st_name, add.area, add.city, add.Nationality, add.p_number, add.age, add.dob.day, add.dob.month, add.dob.year, add.amount, add.deposit.day, add.deposit.month, add.deposit.year, add.account_type);
                                     printf("\nAmount Withdrawn Successfully!!");
                                     printf("\nAvailable Balance : %d\n", add.amount);
                                 }
@@ -386,7 +387,8 @@ void transaction()
                                 break;
                             }
 
-                            case 3:{
+                            case 3:
+                            {
                                 system("cls");
                                 printf("========================================================================================\n");
                                 printf("\t\t\tAVAILABLE BALANCE\n");
@@ -396,7 +398,8 @@ void transaction()
                                 break;
                             }
 
-                            case 4:{
+                            case 4:
+                            {
                                 system("cls");
                                 main();
                                 break;
@@ -404,13 +407,12 @@ void transaction()
 
                             default:
                                 printf("Wrong input!!!\n");
-
                         }
                     }//while
                 }//else end
             }
             else
-                fprintf(tr, "%ld %s %s %s %s %s %s %s %s %s %s %d %d/%d/%d  %d %d/%d/%d %c \n", add.account_number, add.customer_first_name, add.customer_last_name, add.father_first_name, add.father_last_name, add.h_no, add.st_name, add.area, add.city, add.Nationality, add.p_number, add.age, add.dob.day, add.dob.month, add.dob.year, add.amount, add.deposit.day, add.deposit.month, add.deposit.year, add.account_type);
+                fprintf(tr, "%ld %s %s %s %s %s %s %s %s %s %s %d %d/%d/%d %d %d/%d/%d %c\n", add.account_number, add.customer_first_name, add.customer_last_name, add.father_first_name, add.father_last_name, add.h_no, add.st_name, add.area, add.city, add.Nationality, add.p_number, add.age, add.dob.day, add.dob.month, add.dob.year, add.amount, add.deposit.day, add.deposit.month, add.deposit.year, add.account_type);
         }//while end
         fclose(old);
         fclose(tr);
@@ -424,7 +426,7 @@ void transaction()
 void remove_user()
 {
     printf("========================================================================================\n");
-    printf("\t\t\tREMOVE EXISTING RECORD\n");
+    printf("\t\t\tREMOVE EXISITING RECORD\n");
     printf("========================================================================================\n\n\n");
     int check=0;
     FILE *old, *rem;
@@ -454,7 +456,7 @@ void remove_user()
         printf("Record not found!\n");
     callback();
 }
-float interest(int time, int amount, int rate)
+float interest(float time, int amount, int rate)
 {
     int SI;
     SI=(amount*time*rate)/100;
@@ -463,8 +465,8 @@ float interest(int time, int amount, int rate)
 void customer_details()
  {
     FILE *ptr;
-    int rate,time,check=0;
-    float intrst;
+    int rate,check=0;
+    float intrst, time;
     ptr=fopen("DataFile.txt", "r");
     printf("Enter the account number to check the details : ");
     scanf("%ld", &details.account_number);
@@ -473,27 +475,31 @@ void customer_details()
         if(add.account_number==details.account_number)
         {
             system("cls");
-            check++;
-            printf("Account number : %ld \nName : %s %s \nFather's Name : %s %s \nDate of Birth : %d/%d/%d \nAge : %d \nAddress : %s %s %s \nCity : %s \nNationality : %s \nPhone Number : %s \nAvailable Balance : %d", add.account_number, add.customer_first_name, add.customer_last_name, add.father_first_name, add.father_last_name, add.dob.day, add.dob.month, add.dob.year, add.h_no, add.st_name, add.area, add.city, add.Nationality, add.p_number, add.amount);
+            check=1;
+            printf("========================================================================================\n");
+            printf("\t\t\tCUSTOMER DETAILS\n");
+            printf("========================================================================================\n\n\n");
+
+            printf("Account number : %ld \nName : %s %s \nFather's Name : %s %s \nDate of Birth : %d/%d/%d \nAge : %d \nAddress : %s %s %s \nCity : %s \nNationality : %s \nPhone Number : %s \nAvailable Balance : %d", add.account_number, add.customer_first_name, add.customer_last_name, add.father_first_name, add.father_last_name, add.dob.day, add.dob.month, add.dob.year, add.age, add.h_no, add.st_name, add.area, add.city, add.Nationality, add.p_number, add.amount);
             if (add.account_type=='S'||add.account_type=='s')
             {
-                time=(1/12);
+                time=(1.0f/12.0f);
                 rate=8;
                 intrst=interest(time, add.amount, rate);
-                printf("You will get Rs.%.2f as interest on %d of every month", intrst, add.deposit.day);
+                printf("\n\nYou will get Rs.%.2f as interest on %d of every month", intrst, add.deposit.day);
             }
 
             else if (add.account_type=='F'||add.account_type=='f')
             {
-                time=3;
+                time=3.0f;
                 rate=13;
                 intrst=interest(time, add.amount, rate);
-                printf("You will get Rs.%.2f as interest on %d/%d/%d", intrst, add.deposit.day, add.deposit.month, add.deposit.year+3);
+                printf("\n\nYou will get Rs.%.2f as interest on %d/%d/%d", intrst, add.deposit.day, add.deposit.month, add.deposit.year+3);
             }
 
             else if (add.account_type=='C'||add.account_type=='c')
             {
-                printf("You will get no interest");
+                printf("\n\nYou will get no interest");
             }
         }
     }
