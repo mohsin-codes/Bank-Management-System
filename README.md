@@ -10,3 +10,7 @@ Added the stdlib.h header file and used system("cls") to clear the screen after 
 
 Update 1.2 : Added a 'Transaction Function' to the 'File Containing Functions' to add more functionality to the main menu. 
 'Transaction Function' lets user add money and withdraw money from the database.
+
+Update 2.0 : Completed the project. Included all the functions in one file and documented every section of the program file.
+
+if found any bugs or any enhancements please let me know.
