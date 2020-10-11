@@ -318,7 +318,7 @@ void transaction()
     tr=fopen("new.txt", "w");
     printf("Enter Account Number : ");
     scanf("%ld", &transact.account_number);
-    while(fscanf(old, "%ld %s %s %s %s %s %s %s %s %s %s %d %d/%d/%d %d %d/%d/%d %c", &add.account_number, add.customer_first_name, add.customer_last_name, add.father_first_name, add.father_last_name, add.h_no, add.st_name, add.area, add.city, add.Nationality, &add.p_number, &add.age, &add.dob.day, &add.dob.month, &add.dob.year, &add.amount, &add.deposit.day, &add.deposit.month, &add.deposit.year, &add.account_type)!=EOF)
+    while(fscanf(old, "%ld %s %s %s %s %s %s %s %s %s %s %d %d/%d/%d %d %d/%d/%d %c", &add.account_number, add.customer_first_name, add.customer_last_name, add.father_first_name, add.father_last_name, add.h_no, add.st_name, add.area, add.city, add.Nationality, add.p_number, &add.age, &add.dob.day, &add.dob.month, &add.dob.year, &add.amount, &add.deposit.day, &add.deposit.month, &add.deposit.year, &add.account_type)!=EOF)
     {
         if(add.account_number==transact.account_number)
         {
@@ -401,6 +401,10 @@ void transaction()
                             case 4:
                             {
                                 system("cls");
+                                fclose(old);
+                                fclose(tr);
+                                remove("DataFile.txt");
+                                rename("new.txt", "DataFile.txt");
                                 main();
                                 break;
                             }
@@ -411,13 +415,13 @@ void transaction()
                     }//while
                 }//else end
             }
-            else
-                fprintf(tr, "%ld %s %s %s %s %s %s %s %s %s %s %d %d/%d/%d %d %d/%d/%d %c\n", add.account_number, add.customer_first_name, add.customer_last_name, add.father_first_name, add.father_last_name, add.h_no, add.st_name, add.area, add.city, add.Nationality, add.p_number, add.age, add.dob.day, add.dob.month, add.dob.year, add.amount, add.deposit.day, add.deposit.month, add.deposit.year, add.account_type);
+        else
+            fprintf(tr, "%ld %s %s %s %s %s %s %s %s %s %s %d %d/%d/%d %d %d/%d/%d %c\n", add.account_number, add.customer_first_name, add.customer_last_name, add.father_first_name, add.father_last_name, add.h_no, add.st_name, add.area, add.city, add.Nationality, add.p_number, add.age, add.dob.day, add.dob.month, add.dob.year, add.amount, add.deposit.day, add.deposit.month, add.deposit.year, add.account_type);
         }//while end
         fclose(old);
         fclose(tr);
         remove("DataFile.txt");
-        rename("new.text", "DataFile.txt");
+        rename("new.txt", "DataFile.txt");
         if(check!=1)
             printf("No Record Found!!\n");
         callback();
